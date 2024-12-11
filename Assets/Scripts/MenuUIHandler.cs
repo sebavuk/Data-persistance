@@ -17,9 +17,19 @@ public class MenuUIHandler : MonoBehaviour
        scoreText.text= GetData();
     }
 
+    private void Update()
+    {
+        if (Input.GetKeyDown(KeyCode.Delete))
+        {
+            DataManager.Instance.DeleteData();
+            Debug.Log("Data deleted");
+        }
+    }
+
     public void OnNameInput()
     {
-        DataManager.Instance.playerName=playerNameInput.text;
+        DataManager.Instance.currentPlayer=playerNameInput.text;
+        
     }
 
     private string GetData()
@@ -31,6 +41,7 @@ public class MenuUIHandler : MonoBehaviour
 
     public void StartGame()
     {
+        DataManager.Instance.Save();
         SceneManager.LoadScene(1);
     }
 
